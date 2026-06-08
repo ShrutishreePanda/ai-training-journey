@@ -61,3 +61,32 @@ for name in test_names:
 
 #See the full state
 print(result)
+
+# Add this after compile() to verify your graph
+from IPython.display import Image
+
+# ASCII visualization (works anywhere)
+print(graph.get_graph().draw_ascii())
+
+# Output:
+#        +-----------+
+#        | __start__ |
+#        +-----------+
+#              *
+#              *
+#              *
+#       +-------------+
+#       | name_cleaner|
+#       +-------------+
+#              *
+#              *
+#              *
+# +----------------------+
+# | greeting_generator   |
+# +----------------------+
+#              *
+#              *
+#              *
+#        +---------+
+#        | __end__ |
+#        +---------+
