@@ -40,24 +40,3 @@ graph_builder.add_edge(START, "name_cleaner")
 graph_builder.add_edge("name_cleaner", "greeting_generator")
 graph_builder.add_edge("greeting_generator", END)
 
-#Compile
-graph = graph_builder.compile()
-
-if __name__ == "__main__":
-    test_names=[
-        "  john smith  ",
-        "alice johnson",
-        "bob brown",
-        "shruti",
-        "MIKE O'NEIL"
-    ]
-
-#Run the graph and extract the results
-for name in test_names:
-    result = graph.invoke({"name": name})
-    print(f"Input Name: '{name}'")
-    print(f"Output: '{result['greeting']}'")
-    print("-" * 40)
-
-#See the full state
-print(result)
