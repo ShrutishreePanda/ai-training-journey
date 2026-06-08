@@ -46,7 +46,10 @@ graph = graph_builder.compile()
 if __name__ == "__main__":
     test_names=[
         "  john smith  ",
-        "alice johnson"
+        "alice johnson",
+        "bob brown",
+        "shruti",
+        "MIKE O'NEIL"
     ]
 
 #Run the graph and extract the results
