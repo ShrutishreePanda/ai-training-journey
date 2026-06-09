@@ -138,3 +138,49 @@ def general_handler_node(state: IntentState) -> dict:
             "In production, an LLM would answer this!"
         )
     }
+
+#Building and wiring the graph
+graph_builder = StateGraph(IntentState)
+graph_builder.add_edge(START, "router")
+
+graph_builder.add_conditional_edges(
+    "router",
+    decide_next_node,
+    {
+        "greeting": "greeting",
+        "math": "math",
+        "general": "general"
+    }
+)
+
+graph_builder.add_edge("greeting", END)
+graph_builder.add_edge("math", END)
+graph_builder.add_edge("general", END)
+
+graph = graph_builder.compile()
+
+if __name__ == "__main__":
+
+    test_cases = [
+        "Hello there!",
+        "Can you calculate 5 + 3?",
+        "What is AI?",
+        "Good morning!",
+        "Solve 10 / 2",
+        "Who are you?",
+        "What is LangGraph?",
+        "Calculate 7 * 6",
+        "What is Python?",
+        "Hey, how's it going?"
+    ]
+
+print("=" * 55)
+print("Intent Router Test Cases")
+print("=" * 55)
+
+for message in test_cases:
+    result = graph.invoke({"user_message": message})
+    print(f"Input Message: '{message}'")
+    print(f"Intent Detected: '{result['intent']}'")
+    print(f"Output: '{result['result']}'")
+    print("-" * 55)
