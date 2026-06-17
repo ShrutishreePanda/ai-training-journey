@@ -163,3 +163,25 @@ def should_continue(state: AgentState) -> str:
         return "tools"
     else:
         return "end"
+    
+#Create graph
+graph_builder = StateGraph(AgentState)
+
+#Create tool node
+tool_node = ToolNode(tools)
+
+#Register nodes
+graph_builder.add_node("agent", agent_node)
+graph_builder.add_node("tool", tool_node)
+
+#Wire entry and conditional edges
+
+graph_builder.add_edge(START)
+graph_builder.add_conditional_edges(
+    "agent",
+    should_continue,
+    {
+        "tools":"tool",
+        
+    }
+)
