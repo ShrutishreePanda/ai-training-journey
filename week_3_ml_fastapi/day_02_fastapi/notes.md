@@ -1,0 +1,3 @@
+-Query and Path parameters
+-Pydantic
+-Response models
